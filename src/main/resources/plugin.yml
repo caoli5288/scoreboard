@@ -1,0 +1,4 @@
+name: Scoreboard
+main: com.mengcraft.scoreboard.Main
+version: ${project.version}
+author: caoli5288
