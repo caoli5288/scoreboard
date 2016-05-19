@@ -9,11 +9,12 @@ import org.bukkit.scoreboard.Scoreboard;
  */
 public abstract class Board {
 
+    private final Scoreboard board;
     private final Plugin plugin;
     private int taskId;
-    private Scoreboard board;
 
     public Board(Plugin plugin) {
+        board = plugin.getServer().getScoreboardManager().getNewScoreboard();
         this.plugin = plugin;
     }
 
@@ -32,7 +33,7 @@ public abstract class Board {
     public abstract void update();
 
     public void update(Player p) {
-        p.setScoreboard(getBoard());
+        p.setScoreboard(board);
     }
 
     public void cancel() {
@@ -42,9 +43,6 @@ public abstract class Board {
     }
 
     public Scoreboard getBoard() {
-        if (board == null) {
-            board = plugin.getServer().getScoreboardManager().getNewScoreboard();
-        }
         return board;
     }
 
