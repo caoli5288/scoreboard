@@ -5,8 +5,6 @@ package com.mengcraft.scoreboard;
  */
 public class TextLine implements Line {
 
-    public static final Line BLANK = new TextLine("§r ");
-
     private final String text;
 
     private TextLine(String text) {
@@ -24,9 +22,6 @@ public class TextLine implements Line {
     }
 
     public static Line of(String text) {
-        if (text == null || text.equals("")) {
-            return BLANK;
-        }
         return new TextLine(text);
     }
 
