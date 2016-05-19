@@ -11,7 +11,7 @@ import static org.bukkit.ChatColor.RESET;
 public class Format {
 
     private String format;
-    private String colour;
+    private String color;
 
     private String getFormat() {
         if (format == null) {
@@ -20,28 +20,28 @@ public class Format {
         return format;
     }
 
-    private String getColour() {
-        if (colour == null) {
+    private String getColor() {
+        if (color == null) {
             return "";
         }
-        return colour;
+        return color;
     }
 
     public String get() {
-        if (format == null && colour == null) {
+        if (format == null && color == null) {
             return "§r";
         }
-        return getFormat() + getColour();
+        return getFormat() + getColor();
     }
 
     public void set(ChatColor in) {
         if (eq(in, RESET)) {
             format = null;
-            colour = null;
+            color = null;
         } else if (in.isFormat()) {
             format = in.toString();
         } else if (in.isColor()) {
-            colour = in.toString();
+            color = in.toString();
         }
     }
 
