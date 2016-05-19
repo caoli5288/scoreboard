@@ -8,6 +8,7 @@ import java.util.Arrays;
  * Created on 16-5-18.
  */
 public class FixedBodyTest {
+
     @Test
     public void of() throws Exception {
         FixedBody.of(Arrays.asList(
@@ -31,4 +32,5 @@ public class FixedBodyTest {
                 TextLine.of("" + System.nanoTime())
         ));// With lister, build line list dynamic
     }
+
 }

@@ -1,22 +1,30 @@
 package com.mengcraft.scoreboard;
 
-import com.mengcraft.scoreboard.Line;
-
 import java.util.List;
 
 /**
  * Created on 16-5-17.
  */
-public abstract class ListedLine implements Line {
+public class ListedLine implements Line {
 
-    private final List<String> frameList;
+    private final List<String> list;
+    private int cursor;
 
-    public ListedLine(List<String> frameList) {
-        this.frameList = frameList;
+    public ListedLine(List<String> list) {
+        this.list = list;
     }
 
-    public List<String> getFrameList() {
-        return frameList;
+    @Override
+    public String getText() {
+        if (cursor < list.size()) {
+            return list.get(cursor++);
+        }
+        cursor = 0;
+        return list.get(cursor++);
+    }
+
+    public List<String> getList() {
+        return list;
     }
 
 }

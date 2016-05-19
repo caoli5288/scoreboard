@@ -11,7 +11,7 @@ import static org.bukkit.ChatColor.getByChar;
 /**
  * Created on 16-5-18.
  */
-public class LightedLine extends OrderedLine {
+public class LightedLine extends ListedLine {
 
     protected LightedLine(String in, ChatColor lighted) {
         super(format(in, lighted));
