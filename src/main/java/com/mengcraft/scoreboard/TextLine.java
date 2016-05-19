@@ -5,7 +5,7 @@ package com.mengcraft.scoreboard;
  */
 public class TextLine implements Line {
 
-    public static final Line BLANK = new TextLine("");
+    public static final Line BLANK = new TextLine("§r ");
 
     private final String text;
 
