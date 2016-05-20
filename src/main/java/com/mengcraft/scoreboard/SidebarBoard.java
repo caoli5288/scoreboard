@@ -4,36 +4,47 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created on 16-5-17.
  */
 public class SidebarBoard extends Board {
 
-    private Objective objective;
+    private final Objective objective;
     private Body body;
     private Line head;
-    private int count;
+    private List<String> list;
 
     private SidebarBoard(Plugin plugin) {
         super(plugin);
+        objective = getBoard().registerNewObjective("board", "dummy");
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
     }
 
     @Override
     public void update() {
-        Objective objective1 = objective;
+        List<String> list1 = list;
 
-        objective = getBoard().registerNewObjective("board-" + count++, "dummy");
         if (head != null) {
             objective.setDisplayName(head.getText());
         }
 
+        list = new ArrayList<>();
+
+        String line;
         for (LinePair pair : body.getList()) {
-            objective.getScore(pair.getText()).setScore(pair.getScore());
+            line = pair.getText();
+            list.add(line);
+            if (list1 != null) {
+                list1.remove(line);
+            }
+            objective.getScore(line).setScore(pair.getScore());
         }
 
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        if (objective1 != null) {
-            objective1.unregister(); // To prevent sidebar screen flash.
+        if (list1 != null) {
+            list1.forEach(j -> getBoard().resetScores(j));
         }
     }
 
