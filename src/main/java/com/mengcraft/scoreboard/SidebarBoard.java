@@ -4,8 +4,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 
-import java.util.List;
-
 /**
  * Created on 16-5-17.
  */
@@ -23,9 +21,7 @@ public class SidebarBoard extends Board {
     public void update() {
         Objective objective = getBoard().registerNewObjective("board-" + count++, "dummy");
 
-        if (head == null) {
-            objective.setDisplayName(null);
-        } else {
+        if (head != null) {
             objective.setDisplayName(head.getText());
         }
 
