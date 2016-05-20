@@ -25,14 +25,13 @@ public class SidebarBoard extends Board {
 
     @Override
     public void update() {
+        // Any other way update board will led screen flicker
         List<String> list1 = list;
-
         if (head != null) {
             objective.setDisplayName(head.getText());
         }
 
         list = new ArrayList<>();
-
         String line;
         for (LinePair pair : body.getList()) {
             line = pair.getText();
