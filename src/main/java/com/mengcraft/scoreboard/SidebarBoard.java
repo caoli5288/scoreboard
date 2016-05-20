@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class SidebarBoard extends Board {
 
-    private Objective objective;
     private Body body;
     private Line head;
+    private int count;
 
     private SidebarBoard(Plugin plugin) {
         super(plugin);
@@ -21,20 +21,24 @@ public class SidebarBoard extends Board {
 
     @Override
     public void update() {
-        if (objective != null) {
-            objective.unregister();
-        }
-        objective = getBoard().registerNewObjective("board", "dummy");
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        Objective objective = getBoard().registerNewObjective("board-" + count++, "dummy");
 
-        if (head != null) {
+        if (head == null) {
+            objective.setDisplayName(null);
+        } else {
             objective.setDisplayName(head.getText());
         }
 
-        List<LinePair> list = body.getList();
-        for (LinePair pair : list) {
+        for (LinePair pair : body.getList()) {
             objective.getScore(pair.getText()).setScore(pair.getScore());
         }
+
+        Objective objective1 = getBoard().getObjective(DisplaySlot.SIDEBAR);
+        if (objective1 != null) {
+            objective1.unregister();
+        }
+
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
     }
 
     public void setHead(Line head) {

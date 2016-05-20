@@ -29,12 +29,4 @@ public class LinePair {
         return new LinePair(line, i);
     }
 
-    @Override
-    public String toString() {
-        return ("LinePair(" +
-                "line=" + line.getText() + ", " +
-                "score=" + score +
-                ')');
-    }
-
 }
