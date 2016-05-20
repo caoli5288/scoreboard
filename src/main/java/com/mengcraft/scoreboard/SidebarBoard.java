@@ -9,6 +9,7 @@ import org.bukkit.scoreboard.Objective;
  */
 public class SidebarBoard extends Board {
 
+    private Objective objective;
     private Body body;
     private Line head;
     private int count;
@@ -19,8 +20,9 @@ public class SidebarBoard extends Board {
 
     @Override
     public void update() {
-        Objective objective = getBoard().registerNewObjective("board-" + count++, "dummy");
+        Objective objective1 = objective;
 
+        objective = getBoard().registerNewObjective("board-" + count++, "dummy");
         if (head != null) {
             objective.setDisplayName(head.getText());
         }
@@ -29,12 +31,10 @@ public class SidebarBoard extends Board {
             objective.getScore(pair.getText()).setScore(pair.getScore());
         }
 
-        Objective objective1 = getBoard().getObjective(DisplaySlot.SIDEBAR);
-        if (objective1 != null) {
-            objective1.unregister();
-        }
-
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        if (objective1 != null) {
+            objective1.unregister(); // To prevent sidebar screen flash.
+        }
     }
 
     public void setHead(Line head) {
