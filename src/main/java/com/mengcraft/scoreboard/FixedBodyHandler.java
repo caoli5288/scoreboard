@@ -21,6 +21,10 @@ public abstract class FixedBodyHandler implements LineBuilder {
         list.add(line);
     }
 
+    protected void append(String line) {
+        list.add(TextLine.of(line));
+    }
+
     protected abstract void update();
 
 }

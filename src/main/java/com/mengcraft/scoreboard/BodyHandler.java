@@ -21,6 +21,14 @@ public abstract class BodyHandler implements Body {
         list.add(pair);
     }
 
+    protected void append(Line line, int score) {
+        list.add(LinePair.of(line, score));
+    }
+
+    protected void append(String line, int score) {
+        list.add(LinePair.of(TextLine.of(line), score));
+    }
+
     protected abstract void update();
 
 }
