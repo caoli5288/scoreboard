@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created on 16-5-18.
  */
-public interface LineBuilder {
+public interface LineListFactory {
 
     List<Line> getList();
 

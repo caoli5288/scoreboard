@@ -10,15 +10,18 @@ import static java.util.Arrays.asList;
  */
 public class FixedBody implements Body {
 
-    private final LineBuilder builder;
+    private final LineListFactory factory;
 
-    private FixedBody(LineBuilder builder) {
-        this.builder = builder;
+    private FixedBody(LineListFactory factory) {
+        this.factory = factory;
     }
 
     @Override
     public List<LinePair> getList() {
-        List<Line> list = builder.getList();
+        return getFixedList(factory.getList());
+    }
+
+    public static List<LinePair> getFixedList(List<Line> list) {
         int size = list.size();
         List<LinePair> output = new ArrayList<>(size);
         for (Line line : list) {
@@ -27,8 +30,8 @@ public class FixedBody implements Body {
         return output;
     }
 
-    public static FixedBody of(LineBuilder body) {
-        return new FixedBody(body);
+    public static FixedBody of(LineListFactory factory) {
+        return new FixedBody(factory);
     }
 
     public static FixedBody of(List<Line> list) {
