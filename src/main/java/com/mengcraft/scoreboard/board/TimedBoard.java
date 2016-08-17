@@ -1,26 +1,24 @@
-package com.mengcraft.scoreboard;
+package com.mengcraft.scoreboard.board;
 
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.function.Supplier;
 
 /**
- * Created on 16-5-16.
+ * Created on 16-8-18.
  */
-public abstract class Board {
+public abstract class TimedBoard extends Board {
 
-    private final Scoreboard board;
-    private final Plugin plugin;
+    protected final Plugin plugin;
     private int taskId;
 
-    public Board(Plugin plugin) {
-        board = plugin.getServer().getScoreboardManager().getNewScoreboard();
+    protected TimedBoard(Plugin plugin, Scoreboard scoreboard) {
+        super(scoreboard);
         this.plugin = plugin;
     }
 
-    public <T> void update(Supplier<Boolean> condition, int interval) {
+    public void update(Supplier<Boolean> condition, int interval) {
         if (taskId == 0) {
             taskId = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
                 if (condition.get()) {
@@ -32,24 +30,12 @@ public abstract class Board {
         }
     }
 
-    public abstract void update();
-
-    public void update(Player p) {
-        p.setScoreboard(board);
-    }
+    protected abstract void update();
 
     public void cancel() {
         if (taskId != 0) {
             plugin.getServer().getScheduler().cancelTask(taskId);
         }
-    }
-
-    public Scoreboard getBoard() {
-        return board;
-    }
-
-    public Plugin getPlugin() {
-        return plugin;
     }
 
 }

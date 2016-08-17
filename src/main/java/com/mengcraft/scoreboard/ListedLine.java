@@ -1,5 +1,8 @@
 package com.mengcraft.scoreboard;
 
+import com.mengcraft.scoreboard.board.Board;
+
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -8,7 +11,7 @@ import java.util.List;
 public class ListedLine implements Line {
 
     private final List<String> list;
-    private int cursor;
+    private Iterator<String> it;
 
     public ListedLine(List<String> list) {
         this.list = list;
@@ -16,11 +19,10 @@ public class ListedLine implements Line {
 
     @Override
     public String getText() {
-        if (cursor < list.size()) {
-            return list.get(cursor++);
+        if (Board.eq(it, null) || !it.hasNext()) {
+            it = list.iterator();
         }
-        cursor = 0;
-        return list.get(cursor++);
+        return it.next();
     }
 
     public List<String> getList() {

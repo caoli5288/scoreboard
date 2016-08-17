@@ -1,4 +1,8 @@
-package com.mengcraft.scoreboard;
+package com.mengcraft.scoreboard.body;
+
+import com.mengcraft.scoreboard.Line;
+import com.mengcraft.scoreboard.LineListFactory;
+import com.mengcraft.scoreboard.LinePair;
 
 import java.util.ArrayList;
 import java.util.List;

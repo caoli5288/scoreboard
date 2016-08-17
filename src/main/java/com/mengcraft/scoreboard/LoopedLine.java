@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class LoopedLine extends ListedLine {
 
-    protected LoopedLine(String in, int blank) {
+    private LoopedLine(String in, int blank) {
         super(format(in, blank));
     }
 
