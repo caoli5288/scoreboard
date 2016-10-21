@@ -40,7 +40,7 @@ public class SidebarBoard extends TimedBoard {
 
         bodyText = new ArrayList<>();
 
-        if (Board.eq(this.bodyText, null)) {
+        if (bodyText1 == null) {
             for (LinePair pair : body == null ? EmptyBody.INSTANCE.getList() : body.getList()) {
                 String line = pair.getText();
                 bodyText.add(line);
