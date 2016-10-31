@@ -36,11 +36,11 @@ public class SidebarBoard extends TimedBoard {
             objective.setDisplayName(headText);
         }
 
-        List<String> bodyText1 = bodyText;
+        List<String> lastBody = bodyText;
 
         bodyText = new ArrayList<>();
 
-        if (bodyText1 == null) {
+        if (lastBody == null) {
             for (LinePair pair : body == null ? EmptyBody.INSTANCE.getList() : body.getList()) {
                 String line = pair.getText();
                 bodyText.add(line);
@@ -49,11 +49,11 @@ public class SidebarBoard extends TimedBoard {
         } else {
             for (LinePair pair : body == null ? EmptyBody.INSTANCE.getList() : body.getList()) {
                 String line = pair.getText();
-                bodyText1.remove(line);
+                lastBody.remove(line);
                 bodyText.add(line);
                 objective.getScore(line).setScore(pair.getScore());
             }
-            bodyText1.forEach(i -> scoreboard.resetScores(i));
+            lastBody.forEach(i -> scoreboard.resetScores(i));
         }
     }
 
