@@ -25,14 +25,14 @@ public class SidebarBoard extends TimedBoard {
 
     private SidebarBoard(Plugin plugin, Scoreboard scoreboard) {
         super(plugin, scoreboard);
-        objective = initObjective(DisplaySlot.SIDEBAR);
+        objective = getObjectiveOf(DisplaySlot.SIDEBAR);
     }
 
     @Override
     public void update() {
         String headText = head == null ? null : head.getText();
 
-        if (!Board.eq(objective.getDisplayName(), headText)) {
+        if (!objective.getDisplayName().equals(headText)) {
             objective.setDisplayName(headText);
         }
 
@@ -70,7 +70,7 @@ public class SidebarBoard extends TimedBoard {
     }
 
     public static SidebarBoard of(Plugin plugin, Player p) {
-        return of(plugin, Board.initUniqueScoreboard(p));
+        return of(plugin, Board.getScoreboardOf(p));
     }
 
     public static SidebarBoard of(Plugin plugin, Scoreboard scoreboard) {

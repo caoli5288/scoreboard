@@ -16,9 +16,9 @@ public abstract class Board {
         this.scoreboard = scoreboard;
     }
 
-    public Objective initObjective(DisplaySlot slot) {
+    public Objective getObjectiveOf(DisplaySlot slot) {
         Objective objective = scoreboard.getObjective(slot);
-        if (eq(objective, null)) {
+        if (nil(objective)) {
             objective = scoreboard.registerNewObjective("board", "dummy");
             objective.setDisplaySlot(slot);
         }
@@ -29,17 +29,19 @@ public abstract class Board {
         return scoreboard;
     }
 
-    public static boolean eq(Object i, Object j) {
-        return i == j || (i != null && i.equals(j));
+    public static boolean nil(Object i) {
+        return i == null;
     }
 
-    public static Scoreboard initUniqueScoreboard(Player p) {
+    public static Scoreboard getScoreboardOf(Player p) {
         Scoreboard scoreboard = p.getScoreboard();
-        if (eq(scoreboard, p.getServer().getScoreboardManager().getMainScoreboard())) {
+        if (scoreboard == p.getServer().getScoreboardManager().getMainScoreboard()) {
             scoreboard = p.getServer().getScoreboardManager().getNewScoreboard();
             p.setScoreboard(scoreboard);
         }
         return scoreboard;
     }
+
+    public abstract void update();
 
 }

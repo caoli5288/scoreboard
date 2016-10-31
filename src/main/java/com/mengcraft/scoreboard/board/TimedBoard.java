@@ -30,7 +30,7 @@ public abstract class TimedBoard extends Board {
         }
     }
 
-    protected abstract void update();
+    public abstract void update();
 
     public void cancel() {
         if (taskId != 0) {
