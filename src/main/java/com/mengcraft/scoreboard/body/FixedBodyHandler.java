@@ -18,7 +18,7 @@ public abstract class FixedBodyHandler implements Body {
     @Override
     public List<LinePair> getList() {
         list = new ArrayList<>();
-        blank = 0x0;
+        blank = 1;
         update();
         return FixedBody.getFixedList(list);
     }

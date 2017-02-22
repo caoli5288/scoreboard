@@ -10,7 +10,7 @@ import java.util.function.Supplier;
  */
 public abstract class TimedBoard extends Board {
 
-    protected final Plugin plugin;
+    private final Plugin plugin;
     private int taskId;
 
     protected TimedBoard(Plugin plugin, Scoreboard scoreboard) {
@@ -18,6 +18,10 @@ public abstract class TimedBoard extends Board {
         this.plugin = plugin;
     }
 
+    /**
+     * @param condition update this board if {@code true} or cancelled task in other wish
+     * @param interval  update interval by server tick
+     */
     public void update(Supplier<Boolean> condition, int interval) {
         if (taskId == 0) {
             taskId = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
@@ -32,6 +36,9 @@ public abstract class TimedBoard extends Board {
 
     public abstract void update();
 
+    /**
+     * Cancel the timer board update task.
+     */
     public void cancel() {
         if (taskId != 0) {
             plugin.getServer().getScheduler().cancelTask(taskId);

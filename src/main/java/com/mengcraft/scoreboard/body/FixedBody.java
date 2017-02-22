@@ -1,10 +1,10 @@
 package com.mengcraft.scoreboard.body;
 
+import com.google.common.collect.ImmutableList;
 import com.mengcraft.scoreboard.Line;
-import com.mengcraft.scoreboard.LineListFactory;
+import com.mengcraft.scoreboard.LineListBuilder;
 import com.mengcraft.scoreboard.LinePair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -14,36 +14,36 @@ import static java.util.Arrays.asList;
  */
 public class FixedBody implements Body {
 
-    private final LineListFactory factory;
+    private final LineListBuilder builder;
 
-    private FixedBody(LineListFactory factory) {
-        this.factory = factory;
-    }
-
-    @Override
-    public List<LinePair> getList() {
-        return getFixedList(factory.getList());
+    private FixedBody(LineListBuilder builder) {
+        this.builder = builder;
     }
 
     public static List<LinePair> getFixedList(List<Line> list) {
         int size = list.size();
-        List<LinePair> output = new ArrayList<>(size);
+        ImmutableList.Builder<LinePair> b = ImmutableList.builder();
         for (Line line : list) {
-            output.add(LinePair.of(line, size--));
+            b.add(LinePair.of(line, size--));
         }
-        return output;
+        return b.build();
     }
 
-    public static FixedBody of(LineListFactory factory) {
-        return new FixedBody(factory);
-    }
-
-    public static FixedBody of(List<Line> list) {
-        return new FixedBody(() -> list);
+    @Override
+    public List<LinePair> getList() {
+        return getFixedList(builder.build());
     }
 
     public static FixedBody of(Line... list) {
-        return new FixedBody(() -> asList(list));
+        return of(asList(list));
+    }
+
+    public static FixedBody of(List<Line> list) {
+        return of(LineListBuilder.Impl.of(list));
+    }
+
+    public static FixedBody of(LineListBuilder builder) {
+        return new FixedBody(builder);
     }
 
 }
