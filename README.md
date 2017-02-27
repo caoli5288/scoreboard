@@ -16,4 +16,4 @@ b.setHead(TextLine.of("这是一个简单的例子"));
 b.update(p::isOnline, 10); // Set this board uodate each 10 tick while player online.
 ```
 
-More flexible sidebar body builder by extend `FixedBodyHandler` or impl `LineListBuilder`.
+More flexible sidebar body builder by extend `FixedBodyHandler` or impl `LineListBuilder`.(The behavior of the two is quite different. Please read the source code.)

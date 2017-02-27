@@ -1,9 +1,7 @@
 package com.mengcraft.scoreboard.board;
 
 import com.mengcraft.scoreboard.Line;
-import com.mengcraft.scoreboard.LinePair;
 import com.mengcraft.scoreboard.body.Body;
-import com.mengcraft.scoreboard.body.EmptyBody;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -30,29 +28,27 @@ public class SidebarBoard extends TimedBoard {
 
     @Override
     public void update() {
-        String headText = head == null ? null : head.getText();
-
+        String headText = nil(head) ? null : head.getText();
         if (!objective.getDisplayName().equals(headText)) {
             objective.setDisplayName(headText);
         }
 
         List<String> lastBody = bodyText;
-
         bodyText = new ArrayList<>();
 
-        if (lastBody == null) {
-            for (LinePair pair : body == null ? EmptyBody.INSTANCE.getList() : body.getList()) {
+        if (nil(lastBody)) {
+            if (!nil(body)) body.getList().forEach(pair -> {
                 String line = pair.getText();
                 bodyText.add(line);
                 objective.getScore(line).setScore(pair.getScore());
-            }
+            });
         } else {
-            for (LinePair pair : body == null ? EmptyBody.INSTANCE.getList() : body.getList()) {
+            if (!nil(body)) body.getList().forEach(pair -> {
                 String line = pair.getText();
                 lastBody.remove(line);
                 bodyText.add(line);
                 objective.getScore(line).setScore(pair.getScore());
-            }
+            });
             lastBody.forEach(i -> scoreboard.resetScores(i));
         }
     }

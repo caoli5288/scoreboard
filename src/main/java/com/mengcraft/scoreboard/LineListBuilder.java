@@ -7,25 +7,5 @@ import java.util.List;
  */
 public interface LineListBuilder {
 
-    class Impl implements LineListBuilder {
-
-        private final List<Line> handle;
-
-        private Impl(List<Line> handle) {
-            this.handle = handle;
-        }
-
-        @Override
-        public List<Line> build() {
-            return null;
-        }
-
-        public static LineListBuilder of(List<Line> handle) {
-            return new Impl(handle);
-        }
-
-    }
-
     List<Line> build();
-
 }

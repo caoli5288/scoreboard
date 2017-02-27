@@ -39,7 +39,7 @@ public class FixedBody implements Body {
     }
 
     public static FixedBody of(List<Line> list) {
-        return of(LineListBuilder.Impl.of(list));
+        return of(() -> list);
     }
 
     public static FixedBody of(LineListBuilder builder) {
